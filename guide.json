@@ -1,0 +1,101 @@
+{
+  "owner": "JUTZUGC",
+  "code": "JUTZUGC",
+  "project": {
+    "key": "genex",
+    "nameCn": "Genex",
+    "repoName": "genex-deploy-guide",
+    "oneLiner": "0.8k stars，MIT，用对话和多个 Agent 做游戏的桌面工作台",
+    "officialRepo": "https://github.com/genex-games/genex-desktop",
+    "officialDocs": "https://github.com/genex-games/genex-desktop/blob/main/README.md",
+    "stars": "0.8k",
+    "license": "MIT",
+    "highlights": [
+      "对话式开发：描述玩法，Agent 直接写代码与资源",
+      "多 Agent：主 Agent、worker 与 reviewer 可混用不同模型",
+      "本地 3D：通过 Blender 插件在本机生成资产",
+      "外部工具：Meshy、Tripo、ElevenLabs 等经工具路由接入",
+      "订阅复用：可直接用 Claude Code 或 ChatGPT 订阅",
+      "多平台：Windows、macOS Apple Silicon、Linux"
+    ],
+    "mcpSupport": "Genex 通过自身的工具路由与插件扩展能力接入外部服务，不含通用 MCP server；本仓库的 MCP 只提供安装步骤与常见问题。",
+    "webuiUrl": "",
+    "adapterPorts": "",
+    "collectedAt": "2026-10-28",
+    "verification": [
+      [
+        "Release v0.1.25 的 Windows / macOS / Linux 安装包与 SHA256 digest 已核对",
+        "已核对 2026-10-28"
+      ],
+      [
+        "README 确认订阅 / 本地模型两种用法与三平台安装包",
+        "已核对 2026-10-28"
+      ],
+      [
+        "未实测安装与生成（安装包 120–290 MB，需要模型账号）",
+        "说明 2026-10-28"
+      ],
+      [
+        "非目标宿主调用被拦截（HOST_NOT_ALLOWED）",
+        "已验证 2026-10-28"
+      ]
+    ],
+    "deploy": {
+      "type": "binary",
+      "steps": [
+        "if [ \"$(uname -s)\" = \"Darwin\" ]; then url=https://github.com/genex-games/genex-desktop/releases/download/v0.1.25/Genex-darwin-arm64-0.1.25.zip ; want=159224bd67204df1af35fd89f3e7dc33c667cbc64307d5f2eeda580132b426ba ; file=Genex.zip ; elif [ \"$(uname -s)\" = \"Linux\" ]; then url=https://github.com/genex-games/genex-desktop/releases/download/v0.1.25/Genex-linux-amd64.deb ; want=e1a3df34dea2164b444b306c4cdc8f92d2b20fd1658458615b2ffe3e131fc298 ; file=genex.deb ; else echo \"Windows 请使用 PowerShell 步骤下载安装包\"; exit 1 ; fi",
+        "curl -fL -o \"$file\" \"$url\"",
+        "if [ \"$file\" = \"genex.deb\" ]; then echo \"$want  $file\" | sha256sum -c - ; sudo dpkg -i \"$file\" || sudo apt-get install -f -y ; else echo \"$want  $file\" | shasum -a 256 -c - ; unzip -o \"$file\" ; echo \"解压完成：打开 Genex.app\" ; fi"
+      ],
+      "stepsPs": [
+        "curl.exe -L --fail -o Genex-Setup.exe \"https://github.com/genex-games/genex-desktop/releases/download/v0.1.25/Genex-Setup.exe\"",
+        "if ((Get-FileHash Genex-Setup.exe -Algorithm SHA256).Hash.ToLower() -ne '706311e69a5e8105e2540d0abf808d5b7e107e005735e9c968eb1648cfb2bbe0') { throw 'SHA256 校验失败，请重新下载' }",
+        "Start-Process -FilePath .\\Genex-Setup.exe"
+      ],
+      "source": "https://github.com/genex-games/genex-desktop/releases/tag/v0.1.25"
+    },
+    "pitfalls": [
+      "Windows 提示已保护电脑：选「更多信息 → 仍要运行」",
+      "登录后不能用：确认订阅有效，或切到本地模型",
+      "本地模型很慢：换更小模型，或改用订阅模式",
+      "Blender 插件不生效：确认本机 Blender 版本与插件匹配",
+      "导出失败：先在同项目里跑一次预览，确认资源路径完整",
+      "项目打不开：早期版本格式会变，保留旧版本安装包"
+    ]
+  },
+  "gate": {
+    "allow": [
+      "dumate"
+    ],
+    "label": "百度搭子",
+    "url": "https://www.dumate.cn/",
+    "guideUrl": "https://github.com/JUTZUGC/genex-deploy-guide",
+    "howToFix": [
+      "1. 打开 https://www.dumate.cn/ ，下载并安装「百度搭子」电脑端（Windows / macOS）",
+      "2. 用账号登录",
+      "3. 在对话窗口发送：你好，帮我从 github 部署 JUTZUGC/genex-deploy-guide 到我的电脑上",
+      "4. 部署完成后，在同一对话窗口里继续使用"
+    ],
+    "hint": "请改用「百度搭子」部署后再使用；本工具没有网页版入口。",
+    "onError": "allow"
+  },
+  "keywords": [
+    "Genex 安装",
+    "Genex 教程",
+    "AI 做游戏 桌面",
+    "游戏开发 Agent",
+    "多 Agent 游戏开发",
+    "Genex Blender",
+    "AI 游戏原型",
+    "Genex 中文",
+    "对话式游戏开发",
+    "genex deploy guide"
+  ],
+  "topics": [
+    "game-development",
+    "ai-agents",
+    "desktop-app",
+    "blender",
+    "gamedev"
+  ]
+}

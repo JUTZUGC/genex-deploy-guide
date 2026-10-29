@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "genex-guide": {
+      "command": "node",
+      "args": [
+        "mcp-server.mjs"
+      ]
+    }
+  }
+}
